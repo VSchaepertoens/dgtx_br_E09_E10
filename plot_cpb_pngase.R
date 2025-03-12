@@ -27,7 +27,12 @@ abundance_data <- rbind(abundance_data,
 abundance_data_averaged <- abundance_data %>% 
   group_by(modcom_name, experiment_enzyme) %>%
   summarise(frac_abundance = mean(frac_ab),
-            error = sd(frac_ab)) 
+            error = sd(frac_ab)) %>%
+  mutate(experiment_enzyme = case_when(
+    experiment_enzyme == "mAbPAC-RP-2d1mm_deglyco_intact" ~ "NISTmab_CPB_PNGF",
+    # experiment_enzyme == "old_value2" ~ "new_value2",
+    TRUE ~ experiment_enzyme  # Keep other values unchanged
+  ))
 
 
 save(abundance_data, 

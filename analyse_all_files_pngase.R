@@ -70,7 +70,7 @@ if (product == "sample") {
    
  } else if (product == "pngase")  {
    #specify pattern to match regexp for filename 
-   pattern <- "PNGF.*\\.mzML"
+   pattern <- ".*\\.mzML"
    
    #specify modifications composition
    modcoms <- tribble(
@@ -127,7 +127,7 @@ df <- separate_wider_delim(df,
                            filename,
                            delim = "_",
                            names = c("day","month", "year", "experiment", "technical_replicate", "enzyme","enzyme2","aquisition_number"),
-                           too_few = "debug") %>%
+                           too_many = "debug") %>%
   unite(experiment_enzyme,
         c("experiment","enzyme","enzyme2"),
         remove = FALSE)
