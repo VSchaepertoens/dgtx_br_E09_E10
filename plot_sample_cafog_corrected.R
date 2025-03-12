@@ -57,11 +57,12 @@ glycoforms_ordered <- c("A2G0F/A2G0F",
                 "none/A2G2F"
 )
 
-data_to_plot <- abundance_data %>%
+
+
+abundance_data <- abundance_data %>%
 # mutate(modcom_name = rep(glycoforms_ordered, length(coefs))) %>%
   mutate(modcom_name = glycoforms_ordered) %>%
   select(modcom_name, corr_abundance, corr_abundance_error, experiment) %>%
-  filter(!str_detect(modcom_name, "Hex")) %>%
   mutate(modcom_name = factor(modcom_name, levels = c("A2G2F/A2G2F +3 Hex",
                                                     "A2G2F/A2G2F +2 Hex",
                                                     "A2G2F/A2G2F +1 Hex",  
@@ -78,8 +79,11 @@ data_to_plot <- abundance_data %>%
                                                     "none/A2G1F", 
                                                     "none/A2G0F")))
 
+save(abundance_data, 
+     file = "analysis/abundance_data_corrected_sample_ref.RData")
 
-data_to_plot %>%
+abundance_data %>%
+  filter(!str_detect(modcom_name, "Hex")) %>%
   ggplot(aes(modcom_name, corr_abundance)) +
   geom_col(
     aes(y = corr_abundance, fill = experiment),
