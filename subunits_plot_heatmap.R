@@ -6,7 +6,7 @@ library(viridis)
 
 # load_data ---------------------------------------------------------------
 
-data <- read_csv('data/RelQuantIntact01.csv') %>%
+data <- read_csv('analysis/RelQuantIntact01.csv') %>%
   column_to_rownames(var = "...1")
 
 
